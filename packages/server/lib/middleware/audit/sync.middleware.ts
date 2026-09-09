@@ -186,7 +186,7 @@ async function emit(req: Request, res: Response): Promise<void> {
         }
         const locals = res.locals as RequestLocals;
         const { account, environment } = locals;
-        if (!account || !(await canRecordAuditTrail(account.uuid, locals.plan))) {
+        if (!account || !(await canRecordAuditTrail(locals.plan))) {
             return;
         }
         const target = syncTarget(body);
@@ -194,7 +194,8 @@ async function emit(req: Request, res: Response): Promise<void> {
         const event = {
             occurredAt,
             accountId: account.id,
-            environment: environment ? { id: environment.id, display: environment.name } : null,
+            scope: 'environment',
+            environment: environment ? { id: environment.uuid, display: environment.name } : null,
             actor: resolveActor(locals),
             resource: 'sync',
             action: mapped.action,

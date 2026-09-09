@@ -19,7 +19,7 @@ import type {
 } from './account/api.js';
 import type { GetAsyncActionResult, GetPublicV1, PostInternalTriggerFunction, PostPublicTriggerAction } from './action/api.js';
 import type { PostImpersonate } from './admin/http.api.js';
-import type { PostAgentSessions } from './agent/api.js';
+import type { DeleteAgentSession, PostAgentSessions } from './agent/api.js';
 import type { GetAgentSessionMcp, PostAgentSessionMcp } from './agent/mcp.api.js';
 import type { EndpointMethod } from './api.js';
 import type { GetAuditTrail, GetAuditTrailExport } from './audit-trail/api.js';
@@ -69,6 +69,9 @@ import type {
     DeletePublicEnvironment,
     GetEnvironment,
     GetEnvironments,
+    GetPublicApiKey,
+    GetPublicApiKeys,
+    GetPublicEnvironments,
     ListApiKeys,
     PatchApiKey,
     PatchEnvironment,
@@ -147,7 +150,14 @@ import type {
     PatchSharedCredentialsProvider,
     PostSharedCredentialsProvider
 } from './sharedCredentials/api.js';
-import type { GetPublicSyncStatus, PostPublicSyncPause, PostPublicSyncStart, PostPublicTrigger, PutPublicSyncConnectionFrequency } from './sync/api.js';
+import type {
+    GetConnectionSyncs,
+    GetPublicSyncStatus,
+    PostPublicSyncPause,
+    PostPublicSyncStart,
+    PostPublicTrigger,
+    PutPublicSyncConnectionFrequency
+} from './sync/api.js';
 import type { DeleteTeamUser, GetTeam, PatchTeamUser, PutTeam } from './team/api.js';
 import type { GetUser, PatchUser, PutUserPassword } from './user/api.js';
 import type { PostPublicWebhook } from './webhooks/http.api.js';
@@ -170,6 +180,7 @@ export type PublicApiEndpoints =
     | DeletePublicIntegration
     | PostConnectSessions
     | PostAgentSessions
+    | DeleteAgentSession
     | PostAgentSessionMcp
     | GetAgentSessionMcp
     | PostPublicConnectSessionsReconnect
@@ -224,6 +235,9 @@ export type PublicApiEndpoints =
     | AllPublicProxy
     | PostPublicEnvironment
     | DeletePublicEnvironment
+    | GetPublicEnvironments
+    | GetPublicApiKey
+    | GetPublicApiKeys
     | PostPublicApiKey
     | DeletePublicApiKey;
 
@@ -283,6 +297,7 @@ export type PrivateApiEndpoints =
     | PostConnectionMetadata
     | GetConnectionRecordModels
     | GetConnectionRecords
+    | GetConnectionSyncs
     | GetInvite
     | GetMeta
     | GetEmailByExpiredToken
